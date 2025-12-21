@@ -307,7 +307,7 @@
 <script>
   // CONFIG
   const ADMIN_PHONE = '6285117803676'; // 085117803676 (hidden in UI)
-  const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyiRy2CFdnFsH6p-6yTNFEOhKNpLP2dvASnd_vewdExTnJnlUF1un7ZNU2o-XJjcAre/exec'; // optional: Google Apps Script URL to store entries
+  const FORM_ENDPOINT ='https://script.google.com/macros/s/AKfycbxAnZtJ4OuXa1HIREfJEh9i7RjGYtwhaqke19KmFr1hMvv8XKg_SNVufhXIpkAuLm2a/exec'; // optional: Google Apps Script URL to store entries
 
   // ===============================
   // DATABASE TUJUAN (update terbaru)
@@ -484,42 +484,6 @@
       }
     }
     const payload = buildPayload();
-// ===== BUKA WHATSAPP LANGSUNG (WAJIB DI ATAS) =====
-const waLinesAwal = [
-  '*FORM PERMOHONAN LAYANAN*',
-  '*Mobil Layanan Umat Pimpinan Cabang Muhammadiyah (PCM) Wonotunggal.*',
-  '',
-  '*[LAYANAN PASIEN]*',
-  '',
-  'No. Registrasi : (sedang diproses)',
-  '--------------------------------',
-  `Hari : ${payload.hari}`,
-  `Tanggal : ${payload.tanggal}`,
-  '',
-  '*Mohon diisi untuk ketertiban administrasi*',
-  `1. Nama Pemohon : ${payload.pemohon}`,
-  `2. Nama Pasien : ${payload.pasien}`,
-  `3. No. HP : ${payload.hp}`,
-  `4. Alamat jemput : ${payload.alamat}`,
-  `5. Tempat tujuan : ${payload.tujuan}`,
-  `6. Jam berangkat : ${payload.jam}`,
-  `7. Tiba ditujuan : ${payload.tiba}`,
-  `8. Jenis penyakit : ${payload.penyakit}`,
-  `9. Posisi pasien : ${payload.posisi}`,
-  `10. Jumlah Pendamping : ${payload.pendamping}`,
-  `11. Keterangan : ${payload.keterangan ? payload.keterangan : '-'}`,
-  `12. Driver : (diisi oleh PIC Mobil Layanan)`,
-  '',
-  '*Untuk layanan luar kota dimohon mengirimkan bukti pendaftaran Rumah Sakit Tujuan*',
-  '',
-  '*Jangan Lupa Pakai Masker 😷*'
-];
-
-const waTextAwal = encodeURIComponent(waLinesAwal.join('\n'));
-const waUrlAwal = `https://wa.me/${ADMIN_PHONE}?text=${waTextAwal}`;
-
-// 👉 INI KUNCI UTAMA
-window.open(waUrlAwal, '_blank');
 
     confirmSummary.innerHTML = `
       <strong>Hari:</strong> ${payload.hari} <br>
@@ -541,69 +505,76 @@ window.open(waUrlAwal, '_blank');
   confirmEdit.addEventListener('click', ()=>{ confirmPopup.classList.remove('show'); });
 
   confirmSend.addEventListener('click', async () => {
-    let noReg = '-';
+  let noReg = '(diproses sistem)';
 
-    confirmSend.disabled = true; confirmSend.textContent = 'Mengirim...';
-    const payload = buildPayload();
+  confirmSend.disabled = true;
+  confirmSend.textContent = 'Mengirim...';
 
-    // optional: store to FORM_ENDPOINT (non-blocking)
-    if(FORM_ENDPOINT){
-      try{
-        const fd = new FormData(form);
-	fd.append('tujuan', payload.tujuan);
-        fd.append('hari', payload.hari);
-        fd.append('tanggal_formatted', payload.tanggal);
-       const response = await fetch(FORM_ENDPOINT, {
-  method: 'POST',
-  body: fd
-});
-const result = await response.json();
-noReg = result.reg;
-      }catch(e){ console.warn('FORM_ENDPOINT error', e); }
-    }
+  const payload = buildPayload();
 
-    // build WA message (numbered format)
-    const lines = [
+  // =============================
+  // 1️⃣ BUKA WHATSAPP (WAJIB PERTAMA)
+  // =============================
+  const lines = [
     '*FORM PERMOHONAN LAYANAN*',
-      '*Mobil Layanan Umat Pimpinan Cabang Muhammadiyah (PCM) Wonotunggal.*',
-      '',
-      '*[LAYANAN PASIEN]*',
-      '',
-      `No. Registrasi : ${noReg}`,
-      '--------------------------------',
-      `Hari : ${payload.hari}`,
-      `Tanggal : ${payload.tanggal}`,
-      '',
-      '*Mohon diisi untuk ketertiban administrasi*',
-      `1. Nama Pemohon : ${payload.pemohon}`,
-      `2. Nama Pasien : ${payload.pasien}`,
-      `3. No. HP : ${payload.hp}`,
-      `4. Alamat jemput : ${payload.alamat}`,
-      `5. Tempat tujuan : ${payload.tujuan}`,
-      `6. Jam berangkat : ${payload.jam}`,
-      `7. Tiba ditujuan : ${payload.tiba}`,
-      `8. Jenis penyakit : ${payload.penyakit}`,
-      `9. Posisi pasien : ${payload.posisi}`,
-      `10. Jumlah Pendamping : ${payload.pendamping}`,
-      `11. Keterangan : ${payload.keterangan ? payload.keterangan : '-'}`,
-      `12. Driver : (diisi oleh PIC Mobil Layanan)`,
-      '',
-      '*Untuk layanan luar kota dimohon mengirimkan bukti pendaftaran Rumah Sakit Tujuan*',
-      '',
-      '*Jangan Lupa Pakai Masker 😷*'
-];
-    const waText = encodeURIComponent(lines.join('\n'));
-    const waUrl = `https://wa.me/${ADMIN_PHONE}?text=${waText}`;
+    '*Mobil Layanan Umat Pimpinan Cabang Muhammadiyah (PCM) Wonotunggal.*',
+    '',
+    '*[LAYANAN PASIEN]*',
+    '',
+    `No. Registrasi : ${noReg}`,
+    '--------------------------------',
+    `Hari : ${payload.hari}`,
+    `Tanggal : ${payload.tanggal}`,
+    '',
+    '*Mohon diisi untuk ketertiban administrasi*',
+    `1. Nama Pemohon : ${payload.pemohon}`,
+    `2. Nama Pasien : ${payload.pasien}`,
+    `3. No. HP : ${payload.hp}`,
+    `4. Alamat jemput : ${payload.alamat}`,
+    `5. Tempat tujuan : ${payload.tujuan}`,
+    `6. Jam berangkat : ${payload.jam}`,
+    `7. Tiba ditujuan : ${payload.tiba}`,
+    `8. Jenis penyakit : ${payload.penyakit}`,
+    `9. Posisi pasien : ${payload.posisi}`,
+    `10. Jumlah Pendamping : ${payload.pendamping}`,
+    `11. Keterangan : ${payload.keterangan || '-'}`,
+    '',
+    '*Jangan Lupa Pakai Masker 😷*'
+  ];
 
-    setTimeout(()=> {
-      window.open(waUrl,'_blank');
-      confirmPopup.classList.remove('show');
-      showToast();
-      confirmSend.disabled = false; confirmSend.textContent = '✅ Yakin & Kirim';
-      form.reset(); hariDisplay.value='';
-      // reset tujuan selection to default category
-      populateTujuan(kategoriTujuan.value);
-    },700);
+  const waText = encodeURIComponent(lines.join('\n'));
+  const waUrl = `https://wa.me/${ADMIN_PHONE}?text=${waText}`;
+  window.open(waUrl, '_blank'); // ⬅️ INI KUNCI UTAMA
+
+  // =============================
+  // 2️⃣ KIRIM KE GOOGLE SHEET (BACKGROUND)
+  // =============================
+  if (FORM_ENDPOINT) {
+    const fd = new FormData(form);
+    fd.append('tujuan', payload.tujuan);
+    fd.append('hari', payload.hari);
+    fd.append('tanggal_formatted', payload.tanggal);
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: fd
+    })
+    .then(res => res.json())
+    .then(result => console.log('No Reg:', result.reg))
+    .catch(err => console.warn(err));
+  }
+
+  // =============================
+  // 3️⃣ TUTUP POPUP & RESET
+  // =============================
+  confirmPopup.classList.remove('show');
+  showToast();
+  form.reset();
+  hariDisplay.value = '';
+  populateTujuan(kategoriTujuan.value);
+
+  confirmSend.disabled = false;
+  confirmSend.textContent = '✅ Yakin & Kirim';
   });
 
   resetBtn.addEventListener('click', ()=>{ if(confirm('Reset semua field?')){ form.reset(); hariDisplay.value=''; populateTujuan(kategoriTujuan.value); } });
