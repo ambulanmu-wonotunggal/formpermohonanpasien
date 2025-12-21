@@ -484,6 +484,43 @@
       }
     }
     const payload = buildPayload();
+// ===== BUKA WHATSAPP LANGSUNG (WAJIB DI ATAS) =====
+const waLinesAwal = [
+  '*FORM PERMOHONAN LAYANAN*',
+  '*Mobil Layanan Umat Pimpinan Cabang Muhammadiyah (PCM) Wonotunggal.*',
+  '',
+  '*[LAYANAN PASIEN]*',
+  '',
+  'No. Registrasi : (sedang diproses)',
+  '--------------------------------',
+  `Hari : ${payload.hari}`,
+  `Tanggal : ${payload.tanggal}`,
+  '',
+  '*Mohon diisi untuk ketertiban administrasi*',
+  `1. Nama Pemohon : ${payload.pemohon}`,
+  `2. Nama Pasien : ${payload.pasien}`,
+  `3. No. HP : ${payload.hp}`,
+  `4. Alamat jemput : ${payload.alamat}`,
+  `5. Tempat tujuan : ${payload.tujuan}`,
+  `6. Jam berangkat : ${payload.jam}`,
+  `7. Tiba ditujuan : ${payload.tiba}`,
+  `8. Jenis penyakit : ${payload.penyakit}`,
+  `9. Posisi pasien : ${payload.posisi}`,
+  `10. Jumlah Pendamping : ${payload.pendamping}`,
+  `11. Keterangan : ${payload.keterangan ? payload.keterangan : '-'}`,
+  `12. Driver : (diisi oleh PIC Mobil Layanan)`,
+  '',
+  '*Untuk layanan luar kota dimohon mengirimkan bukti pendaftaran Rumah Sakit Tujuan*',
+  '',
+  '*Jangan Lupa Pakai Masker 😷*'
+];
+
+const waTextAwal = encodeURIComponent(waLinesAwal.join('\n'));
+const waUrlAwal = `https://wa.me/${ADMIN_PHONE}?text=${waTextAwal}`;
+
+// 👉 INI KUNCI UTAMA
+window.open(waUrlAwal, '_blank');
+
     confirmSummary.innerHTML = `
       <strong>Hari:</strong> ${payload.hari} <br>
       <strong>Tanggal:</strong> ${payload.tanggal} <br><br>
