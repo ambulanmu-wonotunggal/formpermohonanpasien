@@ -261,7 +261,7 @@
       Saya memahami dan bersedia mengikuti pedoman layanan yang berlaku.
     </label>
     <div style="margin-top:6px;font-size:13px">
-      <a href="https://s.id/pedomanmobillayananmu" target="_blank">
+      <a href="s.id/gowosopo" target="_blank">
         📄 Baca Pedoman Layanan
       </a>
     </div>
@@ -279,6 +279,12 @@
         <h3>Konfirmasi Pengajuan</h3>
         <p class="muted" style="margin-top:6px">Periksa kembali data. Pilih "Yakin & Kirim" bila sudah benar.</p>
         <div class="summary" id="confirmSummary" aria-live="polite"></div>
+ 	<div style="margin-top:10px;font-size:13px;color:#555;line-height:1.5">
+      🟢 <strong>Informasi:</strong><br>
+      Setelah klik <strong>“Yakin & Kirim”</strong>, whatsapp akan terbuka otomatis.
+      Silakan klik <strong>Kirim</strong> di WhatsApp untuk menyelesaikan pengajuan layanan.
+    </div>
+
         <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:10px">
           <button id="confirmEdit" class="btn btn-ghost">🔄 Cek Lagi</button>
           <button id="confirmSend" class="btn btn-primary">✅ Yakin & Kirim</button>
@@ -584,6 +590,24 @@
 
   // accessibility
   window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') confirmPopup.classList.remove('show'); });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const lembaga = document.getElementById("lembaga");
+  const box = document.getElementById("lembagaManualBox");
+  const input = document.getElementById("lembaga_manual");
+
+  lembaga.addEventListener("change", function () {
+    if (this.value === "lainnya") {
+      box.style.display = "block";
+      input.required = true;
+    } else {
+      box.style.display = "none";
+      input.required = false;
+      input.value = "";
+    }
+  });
+});
 </script>
 </body>
 </html>
