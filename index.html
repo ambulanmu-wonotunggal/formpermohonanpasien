@@ -261,7 +261,7 @@
       Saya memahami dan bersedia mengikuti pedoman layanan yang berlaku.
     </label>
     <div style="margin-top:6px;font-size:13px">
-      <a href="https://s.id/pedomanmobillayananmu" target="_blank">
+      <a href="s.id/gowosopo" target="_blank">
         📄 Baca Pedoman Layanan
       </a>
     </div>
@@ -370,6 +370,15 @@
 
   const DAYS = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
   const MONTHS = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+// ===============================
+// GENERATE ID PERMOHONAN (ONLINE)
+// Format: O-1912-1725-XXXX
+// ===============================
+function generateIDPermohonan() {
+  const random = Math.floor(1000 + Math.random() * 9000); // 4 digit
+  return `O-1912-1725-${random}`;
+}
 
   function formatDateDisplay(dateObj){
     const d = dateObj.getDate();
@@ -508,56 +517,59 @@
     confirmPopup.classList.add('show');
   });
 
-  confirmEdit.addEventListener('click', ()=>{ confirmPopup.classList.remove('show'); });
+ confirmEdit.addEventListener('click', () => {
+  confirmPopup.classList.remove('show');
+});
 
-  confirmSend.addEventListener('click', async () => {
-  let noReg = '(diproses sistem)';
-
-  confirmSend.disabled = true;
-  confirmSend.textContent = 'Mengirim...';
+confirmSend.addEventListener('click', async () => {
 
   const payload = buildPayload();
 
-  // =============================
-  // 1️⃣ BUKA WHATSAPP (WAJIB PERTAMA)
-  // =============================
+  // 1️⃣ BUAT ID PERMOHONAN
+  const idPermohonan = generateIDPermohonan();
+
+  // 2️⃣ SUSUN PESAN WHATSAPP
   const lines = [
     '*FORM PERMOHONAN LAYANAN*',
-    '*Mobil Layanan Umat Pimpinan Cabang Muhammadiyah (PCM) Wonotunggal.*',
+    '*Mobil Layanan Umat Pimpinan Cabang*',
+    '*Muhammadiyah Wonotunggal*',
     '',
-    '*[LAYANAN PASIEN]*',
+    `ID Permohonan : *${idPermohonan}*`,
+    '━━━━━━━━━━━━━━━━━━',
     '',
-    `No. Registrasi : ${noReg}`,
-    '--------------------------------',
-    `Hari : ${payload.hari}`,
-    `Tanggal : ${payload.tanggal}`,
+    '*[DATA PASIEN]*',
     '',
-    '*Mohon diisi untuk ketertiban administrasi*',
-    `1. Nama Pemohon : ${payload.pemohon}`,
-    `2. Nama Pasien : ${payload.pasien}`,
-    `3. Usia: ${payload.usia} th`,
-    `4. No. HP : ${payload.hp}`,
-    `5. Alamat jemput : ${payload.alamat}`,
-    `6. Tempat tujuan : ${payload.tujuan}`,
-    `7. Jam berangkat : ${payload.jam}`,
-    `8. Tiba ditujuan : ${payload.tiba}`,
-    `9. Jenis penyakit : ${payload.penyakit}`,
-    `10. Posisi pasien : ${payload.posisi}`,
-    `11. Jumlah Pendamping : ${payload.pendamping}`,
-    `12. Keterangan : ${payload.keterangan || '-'}`,
+    `Nama Pemohon      : ${payload.pemohon}`,
+    `Nama Pasien       : ${payload.pasien}`,
+    `Usia              : ${payload.usia} tahun`,
+    `No. HP            : ${payload.hp}`,
     '',
-    '*Untuk layanan luar kota dimohon mengirimkan bukti pendaftaran Rumah Sakit Tujuan | Jangan Lupa Pakai Masker😷*'
-    `━━━━━━━━━━━━━━━━
-    *PERNYATAAN PERSETUJUAN*
-    Saya menyatakan bahwa data yang saya isikan adalah benar
-    dan saya menyetujui syarat serta ketentuan layanan
-    Mobil Layanan Umat PCM Wonotunggal.
-     ━━━━━━━━━━━━━━━━`
+    'Rute Perjalanan',
+    `   • Titik Jemput      : ${payload.alamat}`,
+    `   • Tujuan            : ${payload.tujuan}`,
+    'Waktu',
+    `   • Jam Berangkat     : ${payload.jam}`,
+    `   • Perkiraan Tiba    : ${payload.tiba}`,
+    '',
+    `Jenis Penyakit    : ${payload.penyakit}`,
+    `Posisi Pasien     : ${payload.posisi}`,
+    `Pendamping        : ${payload.pendamping} orang`,
+    `Keterangan        : ${payload.keterangan || '-'}`,
+    '',
+    '━━━━━━━━━━━━━━━━━━',
+    '*PERNYATAAN PERSETUJUAN*',
+    'Saya menyatakan bahwa data yang saya isikan adalah benar',
+    'dan saya bersedia mengikuti ketentuan layanan',
+    'Mobil Layanan Umat PCM Wonotunggal.',
+    '━━━━━━━━━━━━━━━━━━',
+    '_Pesan ini dikirim secara otomatis melalui_',
+    '_sistem formulir online Mobil Layanan Umat._'
   ];
 
+  // 3️⃣ BUKA WHATSAPP (HARUS PERTAMA)
   const waText = encodeURIComponent(lines.join('\n'));
-  const waUrl = `https://wa.me/${ADMIN_PHONE}?text=${waText}`;
-  window.open(waUrl, '_blank'); // ⬅️ INI KUNCI UTAMA
+  window.open(`https://wa.me/${ADMIN_PHONE}?text=${waText}`, '_blank');
+
 
   // =============================
   // 2️⃣ KIRIM KE GOOGLE SHEET (BACKGROUND)
