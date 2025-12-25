@@ -118,8 +118,8 @@
       <form id="mluForm" autocomplete="on" novalidate>
         <!-- tanggal -->
         <div class="field">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7V3M16 7V3M3 11h18" /></svg>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  📅
           </div>
           <div class="control">
             <label for="tanggal">Tanggal</label>
@@ -129,8 +129,8 @@
 
         <!-- hari (below date) -->
         <div class="field">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ff8a4b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  🗓️
           </div>
           <div class="control">
             <label for="hariDisplay">Hari (otomatis)</label>
@@ -140,7 +140,8 @@
 
         <!-- Nama Pemohon -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  👤</div>
           <div class="control">
             <label for="pemohon">Nama Pemohon</label>
             <input id="pemohon" name="pemohon" type="text" placeholder="" required>
@@ -149,7 +150,8 @@
 
         <!-- No HP -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 3 4.11"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  📞</div>
           <div class="control">
             <label for="hp">No. HP</label>
             <input id="hp" name="hp" type="tel" inputmode="tel" placeholder="Contoh: 081234567890" required>
@@ -158,7 +160,8 @@
 
         <!-- Nama Pasien -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#ff8a4b" stroke-width="1.6"><circle cx="12" cy="8" r="3"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  🧑‍⚕️</div>
           <div class="control">
             <label for="pasien">Nama Pasien</label>
             <input id="pasien" name="pasien" type="text" placeholder="" required>
@@ -167,7 +170,8 @@
 
         <!-- Usia -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><path d="M12 2v6"/><path d="M5 22h14"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  🧍</div>
           <div class="control">
             <label for="usia">Usia Pasien</label>
             <input id="usia" name="usia" type="number" min="0" placeholder="tahun" required>
@@ -176,7 +180,8 @@
 
         <!-- Alamat jemput -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0z"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  🚑</div>
           <div class="control">
             <label for="alamat">Alamat jemput</label>
             <textarea id="alamat" name="alamat" placeholder="Contoh: Jl. Merdeka No.12, Desa A RT 01 RW 01" required></textarea>
@@ -185,7 +190,8 @@
 
         <!-- Tujuan: kategori + dynamic -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#ff8a4b" stroke-width="1.6"><path d="M21 10l-9 9-9-9"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  🏥</div>
           <div class="control">
             <label for="kategoriTujuan">Kategori Tujuan</label>
             <div class="inline-row">
@@ -203,7 +209,8 @@
 
         <!-- dynamic target select -->
         <div class="field" id="tujuanField">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><path d="M12 2v20"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  🏥</div>
           <div class="control">
             <label id="tujuanLabel" for="tujuanSelect">Tempat tujuan</label>
             <select id="tujuanSelect" name="tujuanSelect"></select>
@@ -213,7 +220,8 @@
 
         <!-- Jam & Tiba -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><circle cx="12" cy="12" r="9"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  ⏰</div>
           <div class="control">
             <label for="jam">Jam berangkat</label>
             <input id="jam" name="jam" type="time" required>
@@ -225,28 +233,47 @@
 
         <!-- Jenis penyakit (wajib) -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><path d="M21 8V7a2 2 0 0 0-2-2h-3"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">🩺</div>
           <div class="control">
-            <label for="penyakit">Jenis penyakit</label>
+            <label for="penyakit">Penyakit</label>
             <input id="penyakit" name="penyakit" type="text" placeholder="Contoh: demam / sesak napas" required>
           </div>
         </div>
 
-        <!-- Posisi & Pendamping -->
-        <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#ff8a4b" stroke-width="1.6"><path d="M3 12h18"/></svg></div>
-          <div class="control">
-            <label for="posisi">Posisi pasien</label>
-            <select id="posisi" name="posisi"><option value="Duduk">Duduk</option><option value="Baring">Baring</option></select>
-            <div style="height:8px"></div>
-            <label for="pendamping" class="muted">Jumlah Pendamping</label>
-            <input id="pendamping" name="pendamping" type="number" min="0" placeholder="Contoh: 1">
-          </div>
-        </div>
+        <!-- Posisi Pasien -->
+<div class="field">
+  <div class="icon" aria-hidden="true" style="font-size:22px">
+    🛏️
+  </div>
+  <div class="control">
+    <label for="posisi">Posisi Pasien</label>
+    <select id="posisi" name="posisi">
+      <option value="Duduk">Duduk</option>
+      <option value="Baring">Baring</option>
+    </select>
+  </div>
+</div>
+<!-- Jumlah Pendamping -->
+<div class="field">
+  <div class="icon" aria-hidden="true" style="font-size:22px">
+    👥
+  </div>
+  <div class="control">
+    <label for="pendamping">Jumlah Pendamping</label>
+    <input
+      id="pendamping"
+      name="pendamping"
+      type="number"
+      min="0"
+      placeholder="Contoh: 1"
+    >
+  </div>
+</div>
 
         <!-- Keterangan -->
         <div class="field">
-          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1273de" stroke-width="1.6"><path d="M21 15v4a1 1 0 0 1-1 1H9l-6-6V5"/></svg></div>
+          <div class="icon" aria-hidden="true" style="font-size:22px">
+  📝</div>
           <div class="control">
             <label for="keterangan">Keterangan (opsional)</label>
             <textarea id="keterangan" name="keterangan" placeholder="Opsional: rute, kebutuhan khusus (butuh Oksigen), catatan untuk driver"></textarea>
