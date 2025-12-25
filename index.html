@@ -55,16 +55,16 @@
   .inline-row .col{flex:1}
 
   /* buttons */
-  .actions{display:flex;gap:10px;margin-top:8px}
+  .actions{display:flex;gap:16px;margin-top:8px}
   .btn{padding:14px;border-radius:12px;border:none;font-weight:900;cursor:pointer;font-size:15px}
-  .btn-primary{flex:1;background:linear-gradient(90deg,var(--accent-orange),var(--accent-blue));color:#fff;box-shadow:0 12px 26px rgba(18,115,222,0.12)}
-  .btn-ghost{background:#fff;border:1px solid rgba(11,43,58,0.06);color:var(--muted);padding:12px 14px;border-radius:12px}
+  .btn-primary{flex-grow:1;background: #f7931e;color:#fff;box-shadow:0 12px 26px rgba(247,147,30,0.35)}
+  .btn-ghost{background:#fff;margin-left:auto;flex-shrink:0;border:1px solid rgba(11,43,58,0.06);color:var(--muted);padding:12px 14px;border-radius:12px}
 
   /* popup */
-  .popup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.45);z-index:120;padding:12px}
+  .popup{position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(2,6,23,0.45);z-index:120;padding:12px;overflow-y:auto}
   .popup.show{display:flex}
-  .modal{width:100%;max-width:540px;background:#fff;border-radius:12px;padding:16px;box-shadow:0 24px 60px rgba(2,6,23,0.28)}
-  .summary{margin-top:10px;background:rgba(18,115,222,0.04);padding:12px;border-radius:8px;font-size:15px;color:#07324a}
+  .modal{width:100%;max-width:460px;max-height:85vh;box-sizing:border-box;background:#fff;border-radius:12px;padding:14px;box-shadow:0 20px 50px rgba(2,6,23,0.28)}
+  .summary{margin-top:8px;max-height:45vh;background:rgba(18,115,222,0.04);padding:6px;border-radius:8px;font-size:14px;color:#07324;overflow-y:auto}
 
   /* toast */
   .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;background:#f0fff4;border-left:6px solid #28a745;padding:12px 14px;border-radius:10px;display:none;z-index:130;font-weight:800}
@@ -75,6 +75,91 @@
   .sponsors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;justify-items:center;align-items:center;margin-top:8px}
   .sponsor-slot{width:86px;height:40px;border-radius:8px;background:#fff;border:1px dashed rgba(11,43,58,0.04);display:flex;align-items:center;justify-content:center}
   .sponsor-slot img{max-width:84px;max-height:36px;object-fit:contain}
+.info-box{
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  background:#fffbe6;
+  border:1px solid #ffe58f;
+  font-size:14px;
+  color:#5c4a00;
+}
+
+.info-title{
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+.info-text ol{
+  padding-left:18px;
+  margin:6px 0;
+}
+
+.info-text li{
+  margin-bottom:4px;
+}
+
+.info-note{
+  margin-top:8px;
+  font-size:13px;
+  color:#6b5a00;
+}
+.summary-section{
+  padding:12px;
+  border-radius:10px;
+  background:#f7fafc;
+  margin-bottom:12px;
+}
+
+.summary-title{
+  font-weight:900;
+  color:#0b3a6a;
+  margin-bottom:6px;
+}
+
+.summary-item{
+  margin-bottom:4px;
+  font-size:14px;
+  color:#07324a;
+}
+/* Pernyataan & Persetujuan */
+.persetujuan-box{
+  margin-top:14px;
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#fff7e6,#ffe7ba);
+  border:1px solid #ffd591;
+  color:#7a4a00;
+}
+
+.persetujuan-box label{
+  font-size:14px;
+  line-height:1.6;
+  cursor:pointer;
+}
+
+.persetujuan-box input[type="checkbox"]{
+  transform:scale(1.2);
+  margin-right:6px;
+}
+
+.persetujuan-box a{
+  color:#d46b08;
+  text-decoration:none;
+}
+
+.persetujuan-box a:hover{
+  text-decoration:underline;
+}
+.btn-reset{
+  background:#f1f3f5;
+  color:#555;
+  border:1px solid #d9d9d9;
+}
+
+.btn-reset:hover{
+  background:#e9ecef;
+}
 
   /* Mobile-friendly tweaks */
   @media (max-width:420px){
@@ -154,14 +239,14 @@
   📞</div>
           <div class="control">
             <label for="hp">No. HP</label>
-            <input id="hp" name="hp" type="tel" inputmode="tel" placeholder="Contoh: 081234567890" required>
+            <input id="hp" name="hp" type="number" inputmode="tel" placeholder="Contoh: 6281234567890" required>
           </div>
         </div>
 
         <!-- Nama Pasien -->
         <div class="field">
           <div class="icon" aria-hidden="true" style="font-size:22px">
-  🧑‍⚕️</div>
+  🤒</div>
           <div class="control">
             <label for="pasien">Nama Pasien</label>
             <input id="pasien" name="pasien" type="text" placeholder="" required>
@@ -171,7 +256,7 @@
         <!-- Usia -->
         <div class="field">
           <div class="icon" aria-hidden="true" style="font-size:22px">
-  🧍</div>
+  🔢</div>
           <div class="control">
             <label for="usia">Usia Pasien</label>
             <input id="usia" name="usia" type="number" min="0" placeholder="tahun" required>
@@ -184,7 +269,7 @@
   🚑</div>
           <div class="control">
             <label for="alamat">Alamat jemput</label>
-            <textarea id="alamat" name="alamat" placeholder="Contoh: Jl. Merdeka No.12, Desa A RT 01 RW 01" required></textarea>
+            <textarea id="alamat" name="alamat" placeholder="Contoh: Jl. Berkemajuan No.12, Desa A RT 19 RW 12" required></textarea>
           </div>
         </div>
 
@@ -281,20 +366,25 @@
         </div>
 
         <div class="actions">
-<div class="field" style="margin-top:12px">
-  <div class="control">
-    <label style="font-size:14px">
-      <input type="checkbox" id="persetujuan" required>
-      Saya memahami dan bersedia mengikuti pedoman layanan yang berlaku.
-    </label>
-    <div style="margin-top:6px;font-size:13px">
-      <a href="https://s.id/pedomanmobillayananmu" target="_blank">
-        📄 Baca Pedoman Layanan
-      </a>
+  <div class="field persetujuan-box">
+    <div class="control">
+      <label>
+        <input type="checkbox" id="persetujuan" required>
+        Saya menyatakan bahwa seluruh data yang saya isikan telah sesuai
+        dengan kondisi sebenarnya, serta memahami dan bersedia mengikuti
+        pedoman layanan Mobil Layanan Umat PCM Wonotunggal.
+      </label>
+
+      <div style="margin-top:6px;font-size:13px">
+        <a href="https://s.id/pedomanmobillayananmu" target="_blank">
+          <strong>📄 Baca Pedoman Layanan</strong>
+        </a>
+      </div>
     </div>
   </div>
 </div>
-          <button type="button" id="openConfirm" class="btn btn-primary">Kirim & Hubungi Admin</button>
+
+          <button type="button" id="openConfirm" class="btn btn-primary">Kirim & Ajukan</button>
           <button type="button" id="resetBtn" class="btn btn-ghost">Reset</button>
         </div>
       </form>
@@ -303,14 +393,24 @@
     <!-- Confirm popup -->
     <div class="popup" id="confirmPopup" role="dialog" aria-modal="true">
       <div class="modal">
-        <h3>Konfirmasi Pengajuan</h3>
-        <p class="muted" style="margin-top:6px">Periksa kembali data. Pilih "Yakin & Kirim" bila sudah benar.</p>
+        <h3>🧾 Konfirmasi Data Pengajuan</h3>
+        <p class="muted" style="margin-top:6px">Pastikan seluruh data di bawah ini sudah benar.
+Data tidak dapat diubah setelah dikirim.</p>
         <div class="summary" id="confirmSummary" aria-live="polite"></div>
- 	<div style="margin-top:10px;font-size:13px;color:#555;line-height:1.5">
-      🟢 <strong>Informasi:</strong><br>
-      Setelah klik <strong>“Yakin & Kirim”</strong>, whatsapp akan terbuka otomatis.
-      Silakan klik <strong>Kirim</strong> di WhatsApp untuk menyelesaikan pengajuan layanan.
+ 	<div class="info-box">
+  <div class="info-title">⚠️ PERHATIAN</div>
+  <div class="info-text">
+    Setelah menekan tombol <strong>“Yakin & Kirim”</strong>:
+    <ol>
+      <li><strong>WhatsApp akan terbuka otomatis</strong> 📲</li>
+      <li>Periksa kembali pesan yang muncul</li>
+      <li>Tekan tombol <strong>KIRIM</strong> di WhatsApp untuk menyelesaikan permohonan</li>
+    </ol>
+    <div class="info-note">
+      Jika WhatsApp tidak terbuka, pastikan aplikasi WhatsApp sudah terpasang di perangkat Anda.
     </div>
+  </div>
+</div>
 
         <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:10px">
           <button id="confirmEdit" class="btn btn-ghost">🔄 Cek Lagi</button>
@@ -526,21 +626,37 @@ function generateIDPermohonan() {
       }
     }
     const payload = buildPayload();
+confirmSummary.innerHTML = `
+  <div class="summary-section">
+    <div class="summary-title">📅 Jadwal Layanan</div>
+    <div class="summary-item"><b>Hari:</b> ${payload.hari}</div>
+    <div class="summary-item"><b>Tanggal:</b> ${payload.tanggal}</div>
+  </div>
 
-    confirmSummary.innerHTML = `
-      <strong>Hari:</strong> ${payload.hari} <br>
-      <strong>Tanggal:</strong> ${payload.tanggal} <br><br>
-      <strong>Nama Pemohon:</strong> ${payload.pemohon} <br>
-      <strong>Nama Pasien:</strong> ${payload.pasien} (Usia: ${payload.usia}) <br>
-      <strong>No. HP:</strong> ${payload.hp} <br>
-      <strong>Alamat Jemput:</strong> ${payload.alamat} <br>
-      <strong>Tujuan:</strong> ${payload.tujuan} <br>
-      <strong>Jam Berangkat:</strong> ${payload.jam} &nbsp;&nbsp;
-      <strong>Tiba:</strong> ${payload.tiba} <br>
-      <strong>Jenis Penyakit:</strong> ${payload.penyakit} <br>
-      <strong>Posisi:</strong> ${payload.posisi} &nbsp;&nbsp;
-      <strong>Pendamping:</strong> ${payload.pendamping} <br>
-      <strong>Keterangan:</strong> ${payload.keterangan ? payload.keterangan : '-'} `;
+  <div class="summary-section">
+    <div class="summary-title">👤 Data Pemohon & Pasien</div>
+    <div class="summary-item"><b>Nama Pemohon:</b> ${payload.pemohon}</div>
+    <div class="summary-item"><b>Nama Pasien:</b> ${payload.pasien}</div>
+    <div class="summary-item"><b>Usia:</b> ${payload.usia} tahun</div>
+    <div class="summary-item"><b>No. HP:</b> ${payload.hp}</div>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-title">🚑 Rute & Waktu</div>
+    <div class="summary-item"><b>Alamat Jemput:</b><br>${payload.alamat}</div>
+    <div class="summary-item"><b>Tujuan:</b> ${payload.tujuan}</div>
+    <div class="summary-item"><b>Waktu:</b> ${payload.jam} → ${payload.tiba}</div>
+  </div>
+
+  <div class="summary-section">
+    <div class="summary-title">🩺 Kondisi Pasien</div>
+    <div class="summary-item"><b>Penyakit:</b> ${payload.penyakit}</div>
+    <div class="summary-item"><b>Posisi:</b> ${payload.posisi}</div>
+    <div class="summary-item"><b>Pendamping:</b> ${payload.pendamping}</div>
+    <div class="summary-item"><b>Keterangan:</b> ${payload.keterangan || '-'}</div>
+  </div>
+`;
+
     confirmPopup.classList.add('show');
   });
 
@@ -591,7 +707,7 @@ confirmSend.addEventListener('click', async () => {
   '',
   '━━━━━━━━━━━━━━━━━━',
   '*PERNYATAAN PERSETUJUAN*',
-  'Saya menyatakan bahwa data yang saya isikan adalah benar dan saya bersedia mengikuti ketentuan layanan Mobil Layanan Umat PCM Wonotunggal.',
+  'Saya menyatakan bahwa seluruh data yang saya isikan telah sesuai dengan kondisi sebenarnya, serta memahami dan bersedia mengikuti pedoman layanan Mobil Layanan Umat PCM Wonotunggal.',
   '',
   '---------',
   '_Pesan ini dikirim otomatis melalui sistem_',
