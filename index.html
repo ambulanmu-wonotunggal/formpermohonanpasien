@@ -685,13 +685,13 @@ confirmSend.addEventListener('click', async () => {
   `> Nama Pasien : *${payload.pasien}*`,
   `> Usia : *${payload.usia} tahun*`,
   `> WhatsApp : *${payload.hp}*`,
-  
+  '',
   '*RUTE & WAKTU*',
   `> Titik Jemput : *${payload.alamat}*`,
   `> Tujuan : *${payload.tujuan}*`,
-  `> Berangkat  : *${payload.jam}`,
+  `> Berangkat  : *${payload.jam}*`,
   `> Tiba di Tujuan : *${payload.tiba}*`,
-  
+  '',
   '*INFORMASI TAMBAHAN*',
   `> Penyakit : *${payload.penyakit}*`,
   `> Posisi Pasien : *${payload.posisi}*`,
@@ -772,23 +772,16 @@ document.addEventListener("DOMContentLoaded", function () {
 // PICKER JAM 24 JAM (Versi Manual)
 // =============================
 // Letakkan script ini di bagian <script> sebelum script pengiriman form atau di bawah DOMContentLoaded
-
 function createTimePicker(id) {
   const input = document.getElementById(id);
   if (!input) return;
+
   input.setAttribute('type', 'time');
-  input.setAttribute('step', '300'); // step 5 menit
-  // opsional: default value bisa di set ke jam sekarang
-  const now = new Date();
-  const hh = now.getHours().toString().padStart(2,'0');
-  const mm = now.getMinutes().toString().padStart(2,'0');
-  input.value = `${hh}:${mm}`;
+  input.setAttribute('step', '300'); // 5 menit
+  input.value = '';                 // PASTI KOSONG
 }
-
-// contoh pemanggilan
-createTimePicker('jam');     // id input jam berangkat
-createTimePicker('tiba');    // id input jam tiba
-
+createTimePicker('jam');
+createTimePicker('tiba');
 </script>
 <script>
 document.getElementById("btnPopup").addEventListener("click", function () {
