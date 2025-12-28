@@ -71,10 +71,69 @@
   .toast.show{display:block}
 
   /* footer */
-  footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
-  .sponsors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;justify-items:center;align-items:center;margin-top:8px}
-  .sponsor-slot{width:86px;height:40px;border-radius:8px;background:#fff;border:1px dashed rgba(11,43,58,0.04);display:flex;align-items:center;justify-content:center}
-  .sponsor-slot img{max-width:84px;max-height:36px;object-fit:contain}
+  footer{
+  margin-top:20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* sponsor grid */
+.sponsors{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:14px;
+  align-items:center;
+  margin-top:12px;
+}
+
+/* sponsor card */
+.sponsor-slot{
+  height:72px;
+  background:#fff;
+  border:1.5px solid #cfe0ff;
+  border-radius:14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:10px;
+  transition:all .15s ease;
+}
+
+.sponsor-slot img{
+  max-height:44px;
+  max-width:100%;
+  object-fit:contain;
+}
+
+.sponsor-slot:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(18,115,222,0.12);
+}
+
+/* tablet */
+@media (max-width:768px){
+  .sponsors{
+    grid-template-columns:repeat(3, 1fr);
+  }
+}
+
+/* mobile */
+@media (max-width:420px){
+  .sponsors{
+    grid-template-columns:repeat(2, 1fr);
+  }
+
+  .sponsor-slot{
+    height:68px;
+  }
+
+  .sponsor-slot img{
+    max-height:40px;
+  }
+}
 .info-box{
   margin-top:12px;
   padding:12px;
@@ -304,18 +363,23 @@
         </div>
 
         <!-- Jam & Tiba -->
-        <div class="field">
-          <div class="icon" aria-hidden="true" style="font-size:22px">
-  ⏰</div>
-          <div class="control">
-            <label for="jam">Jam berangkat</label>
-            <input id="jam" name="jam" type="time" required>
-            <div style="height:8px"></div>
-            <label for="tiba" class="muted">Tiba ditujuan (Jam brapa harus sampai)</label>
-            <input id="tiba" name="tiba" type="time">
-          </div>
-        </div>
+<div class="field">
+  <div class="icon" aria-hidden="true" style="font-size:22px">⏰</div>
 
+  <div class="control">
+    <label for="jam">Jam berangkat</label>
+    <select id="jam" name="jam" required>
+      <option value="">Pilih Jam Berangkat</option>
+    </select>
+
+    <div style="height:8px"></div>
+
+    <label for="tiba" class="muted">Tiba ditujuan (Jam berapa harus sampai)</label>
+    <select id="tiba" name="tiba">
+      <option value="">Pilih Jam Tiba</option>
+    </select>
+  </div>
+</div>
         <!-- Jenis penyakit (wajib) -->
         <div class="field">
           <div class="icon" aria-hidden="true" style="font-size:22px">🩺</div>
@@ -768,31 +832,46 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script>
-// =============================
-// PICKER JAM 24 JAM (Versi Manual)
-// =============================
-// Letakkan script ini di bagian <script> sebelum script pengiriman form atau di bawah DOMContentLoaded
-function createTimePicker(id) {
-  const input = document.getElementById(id);
-  if (!input) return;
+function generateTimeOptions(selectId, startHour = 5) {
+  const select = document.getElementById(selectId);
+  if (!select) return;
 
-  input.setAttribute('type', 'time');
-  input.setAttribute('step', '300'); // 5 menit
-  input.value = '';                 // PASTI KOSONG
+  for (let i = 0; i < 24; i++) {
+    const h = (startHour + i) % 24;
+
+    for (let m = 0; m < 60; m += 15) {
+      const hh = String(h).padStart(2,'0');
+      const mm = String(m).padStart(2,'0');
+
+      const opt = document.createElement('option');
+      opt.value = `${hh}:${mm}`;
+      opt.textContent = `${hh}:${mm}`;
+      select.appendChild(opt);
+    }
+  }
 }
-createTimePicker('jam');
-createTimePicker('tiba');
+
+generateTimeOptions('jam', 5);
+generateTimeOptions('tiba', 5);
 </script>
 <script>
-document.getElementById("btnPopup").addEventListener("click", function () {
-  const form = document.getElementById("formDakwah");
+function timeToMinutes(t) {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+}
 
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    return;
+document.getElementById('jam').addEventListener('change', () => {
+  document.getElementById('tiba').value = '';
+});
+
+document.getElementById('tiba').addEventListener('change', function () {
+  const jam = document.getElementById('jam').value;
+  if (!jam) return;
+
+  if (timeToMinutes(this.value) <= timeToMinutes(jam)) {
+    alert('Jam tiba harus lebih besar dari jam berangkat');
+    this.value = '';
   }
-
-  document.getElementById("popup").style.display = "flex";
 });
 </script>
 </body>
