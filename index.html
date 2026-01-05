@@ -695,12 +695,12 @@ function generateIDPermohonan() {
     alert('Mohon menyetujui ketentuan layanan terlebih dahulu.');
     return;
   }
-    const required = ['pemohon','pasien','usia','hp','alamat','tanggal','jam','penyakit'];
+    const required = ['pemohon','pasien','usia','hp','alamat','tanggal','jam','penyakit','pendamping','jaminan'];
     for(const id of required){
       const el = document.getElementById(id);
       if(!el || !el.value){
         el && el.focus();
-        alert('Mohon lengkapi semua kolom yang wajib (termasuk jenis penyakit).');
+        alert('Masih ada kolom belum terisi. Mohon lengkapi semua kolom yang wajib.');
         return;
       }
     }
