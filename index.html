@@ -322,6 +322,21 @@
           </div>
         </div>
 
+<!-- Kartu Jaminan -->
+<div class="field">
+  <div class="icon" aria-hidden="true" style="font-size:22px">💳</div>
+  <div class="control">
+    <label for="jaminan">Status Berobat Pasien</label>
+    <select id="jaminan" name="jaminan" required>
+      <option value="">Pilih Status Berobat</option>
+      <option value="BPJS">BPJS</option>
+      <option value="UMUM">Umum</option>
+    </select>
+
+    <div id="jaminanInfo" class="muted" style="margin-top:6px;display:none;"></div>
+  </div>
+</div>
+
         <!-- Alamat jemput -->
         <div class="field">
           <div class="icon" aria-hidden="true" style="font-size:22px">
@@ -661,6 +676,7 @@ function generateIDPermohonan() {
       pemohon: data.get('pemohon') || '-',
       pasien: data.get('pasien') || '-',
       usia: data.get('usia') || '-',
+      jaminan: data.get('jaminan') || '-',
       hp: data.get('hp') || '-',
       alamat: data.get('alamat') || '-',
       tujuan: tujuanVal || '-',
@@ -716,6 +732,7 @@ confirmSummary.innerHTML = `
     <div class="summary-item"><b>Penyakit:</b> ${payload.penyakit}</div>
     <div class="summary-item"><b>Posisi:</b> ${payload.posisi}</div>
     <div class="summary-item"><b>Pendamping:</b> ${payload.pendamping}</div>
+    <div class="summary-item"><b>Kartu Jaminan:</b> ${payload.jaminan}</div>
     <div class="summary-item"><b>Keterangan:</b> ${payload.keterangan || '-'}</div>
   </div>
 `;
@@ -870,6 +887,27 @@ document.getElementById('tiba').addEventListener('change', function () {
   if (timeToMinutes(this.value) <= timeToMinutes(jam)) {
     alert('Jam tiba harus lebih besar dari jam berangkat');
     this.value = '';
+  }
+});
+</script>
+<script>
+const jaminan = document.getElementById('jaminan');
+const jaminanInfo = document.getElementById('jaminanInfo');
+
+jaminan.addEventListener('change', function () {
+  if (this.value === 'BPJS') {
+    jaminanInfo.style.display = 'block';
+    jaminanInfo.textContent =
+      'Informasi ini hanya untuk pendataan. Pasien tetap kami layani tanpa membedakan jenis berobat.';
+  } 
+  else if (this.value === 'UMUM') {
+    jaminanInfo.style.display = 'block';
+    jaminanInfo.textContent =
+      'Informasi ini hanya untuk pendataan. Pasien tetap kami layani tanpa membedakan jenis berobat.';
+  } 
+  else {
+    jaminanInfo.style.display = 'none';
+    jaminanInfo.textContent = '';
   }
 });
 </script>
