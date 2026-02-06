@@ -390,7 +390,7 @@
     <div style="height:8px"></div>
 
     <label for="tiba" class="muted">Tiba ditujuan (Jam berapa harus sampai)</label>
-    <select id="tiba" name="tiba">
+    <select id="tiba" name="tiba" required>
       <option value="">Pilih Jam Tiba</option>
     </select>
   </div>
@@ -534,6 +534,8 @@ Data tidak dapat diubah setelah dikirim.</p>
     'RS ARO Pekalongan',
     'RS Siti Khotijah Pekalongan',
     'RS Kraton Pekalongan',
+    'RS H.A Zaky Djunaid Pekalongan',
+    'RS Telogorejo Semarang',
     'RS Hermina Pekalongan'
   ];
 
@@ -695,7 +697,7 @@ function generateIDPermohonan() {
     alert('Mohon menyetujui ketentuan layanan terlebih dahulu.');
     return;
   }
-    const required = ['pemohon','pasien','usia','hp','alamat','tanggal','jam','penyakit','pendamping','jaminan'];
+    const required = ['pemohon','pasien','usia','hp','alamat','tanggal','jam','tiba','penyakit','pendamping','jaminan'];
     for(const id of required){
       const el = document.getElementById(id);
       if(!el || !el.value){
